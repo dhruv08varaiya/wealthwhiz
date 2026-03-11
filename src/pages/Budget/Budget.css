@@ -1,0 +1,24 @@
+.budget-page__header { margin-bottom: 24px; }
+.budget-page__title { font-size: 1.4rem; font-weight: 700; color: var(--ww-text); margin: 0; }
+.budget-page__subtitle { color: var(--ww-text-muted); font-size: 0.85rem; margin-top: 2px; }
+.section-title { font-size: 1rem; font-weight: 600; color: var(--ww-text); margin-bottom: 16px; }
+.budget-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.budget-card { background: var(--ww-card-bg); border: 1px solid var(--ww-border-light); border-radius: var(--ww-radius); padding: 18px; transition: var(--ww-transition); }
+.budget-card:hover { transform: translateY(-2px); box-shadow: var(--ww-shadow); }
+.budget-card__header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.budget-card__icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+.budget-card__cat { flex: 1; font-weight: 600; font-size: 0.9rem; color: var(--ww-text); }
+.budget-card__amounts { margin-bottom: 10px; }
+.budget-card__spent { font-size: 1.2rem; font-weight: 700; color: var(--ww-text); }
+.budget-card__total { font-size: 0.85rem; color: var(--ww-text-muted); margin-left: 4px; }
+.budget-card__pct { font-size: 0.78rem; color: var(--ww-text-muted); margin-top: 6px; text-align: right; }
+.goals-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.goal-card { background: var(--ww-card-bg); border: 1px solid var(--ww-border-light); border-radius: var(--ww-radius); padding: 20px; text-align: center; transition: var(--ww-transition); }
+.goal-card:hover { transform: translateY(-2px); box-shadow: var(--ww-shadow); }
+.goal-card__icon { font-size: 2rem; margin-bottom: 8px; }
+.goal-card__name { font-weight: 600; color: var(--ww-text); margin-bottom: 8px; }
+.goal-card__amounts { margin-bottom: 10px; }
+.goal-card__saved { font-size: 1.1rem; font-weight: 700; color: var(--ww-primary); }
+.goal-card__target { font-size: 0.85rem; color: var(--ww-text-muted); margin-left: 4px; }
+.goal-card__footer { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--ww-text-muted); }
+.goal-card__deadline { font-style: italic; }

@@ -1,0 +1,137 @@
+/* ======================================================
+   WealthWhiz — Dashboard Styles
+   ====================================================== */
+
+.dashboard__header {
+  margin-bottom: 24px;
+}
+
+.dashboard__greeting {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ww-text);
+  margin: 0;
+}
+
+.dashboard__subtitle {
+  color: var(--ww-text-muted);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+/* Summary Cards */
+.dashboard__cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.summary-card {
+  background: var(--ww-card-bg);
+  border: 1px solid var(--ww-border-light);
+  border-radius: var(--ww-radius);
+  padding: 20px;
+  transition: var(--ww-transition);
+}
+
+.summary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ww-shadow);
+}
+
+.summary-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.summary-card__icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.summary-card__change {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.summary-card__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ww-text);
+  margin-bottom: 4px;
+}
+
+.summary-card__label {
+  font-size: 0.825rem;
+  color: var(--ww-text-muted);
+  font-weight: 500;
+}
+
+/* Charts */
+.dashboard__charts {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.chart-card {
+  background: var(--ww-card-bg);
+  border: 1px solid var(--ww-border-light);
+  border-radius: var(--ww-radius);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.chart-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.chart-card__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ww-text);
+  margin: 0;
+}
+
+.chart-card__body {
+  position: relative;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .dashboard__cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .dashboard__charts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .dashboard__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard__greeting {
+    font-size: 1.25rem;
+  }
+
+  .summary-card__value {
+    font-size: 1.25rem;
+  }
+}

@@ -1,0 +1,11 @@
+.analytics-page__header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+.analytics-page__title { font-size: 1.4rem; font-weight: 700; color: var(--ww-text); margin: 0; }
+.analytics-page__subtitle { color: var(--ww-text-muted); font-size: 0.85rem; }
+.analytics-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+.analytics-stat { background: var(--ww-card-bg); border: 1px solid var(--ww-border-light); border-radius: var(--ww-radius); padding: 18px; text-align: center; }
+.analytics-stat__label { display: block; font-size: 0.8rem; color: var(--ww-text-muted); margin-bottom: 6px; }
+.analytics-stat__value { font-size: 1.3rem; font-weight: 700; }
+.analytics-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.analytics-charts .chart-card:last-child { grid-column: span 2; max-width: 500px; margin: 0 auto; width: 100%; }
+@media (max-width: 1200px) { .analytics-stats { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .analytics-charts { grid-template-columns: 1fr; } .analytics-charts .chart-card:last-child { grid-column: span 1; } .analytics-stats { grid-template-columns: 1fr 1fr; } }

@@ -1,0 +1,199 @@
+/* ======================================================
+   WealthWhiz — Bootstrap 5 Overrides
+   ====================================================== */
+
+/* === Buttons === */
+.btn-primary {
+  background: linear-gradient(135deg, var(--ww-primary), var(--ww-primary-light));
+  border: none;
+  border-radius: var(--ww-radius-sm);
+  font-weight: 600;
+  padding: 0.6rem 1.5rem;
+  transition: var(--ww-transition);
+  box-shadow: var(--ww-shadow-sm);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--ww-primary-dark), var(--ww-primary));
+  transform: translateY(-1px);
+  box-shadow: var(--ww-shadow);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-outline-primary {
+  color: var(--ww-primary);
+  border-color: var(--ww-primary);
+  border-radius: var(--ww-radius-sm);
+  font-weight: 500;
+  transition: var(--ww-transition);
+}
+
+.btn-outline-primary:hover {
+  background: var(--ww-primary);
+  border-color: var(--ww-primary);
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, var(--ww-danger), #d63d1f);
+  border: none;
+  border-radius: var(--ww-radius-sm);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, var(--ww-success), var(--ww-accent));
+  border: none;
+  border-radius: var(--ww-radius-sm);
+}
+
+/* === Cards === */
+.card {
+  background: var(--ww-card-bg);
+  border: 1px solid var(--ww-border-light);
+  border-radius: var(--ww-radius);
+  box-shadow: var(--ww-shadow-sm);
+  transition: var(--ww-transition);
+}
+
+.card:hover {
+  box-shadow: var(--ww-shadow);
+  transform: translateY(-2px);
+}
+
+/* === Forms === */
+.form-control,
+.form-select {
+  background-color: var(--ww-bg-secondary);
+  border: 1px solid var(--ww-border);
+  border-radius: var(--ww-radius-sm);
+  color: var(--ww-text);
+  padding: 0.65rem 1rem;
+  transition: var(--ww-transition);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--ww-primary);
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
+  background-color: var(--ww-card-bg);
+}
+
+.form-label {
+  font-weight: 500;
+  color: var(--ww-text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 0.4rem;
+}
+
+/* === Modal === */
+.modal-content {
+  background: var(--ww-card-bg);
+  border: 1px solid var(--ww-border);
+  border-radius: var(--ww-radius-lg);
+  box-shadow: var(--ww-shadow-lg);
+}
+
+.modal-header {
+  border-bottom-color: var(--ww-border-light);
+}
+
+.modal-footer {
+  border-top-color: var(--ww-border-light);
+}
+
+/* === Navbar === */
+.navbar {
+  background: var(--ww-navbar-bg) !important;
+  border-bottom: 1px solid var(--ww-border-light);
+  box-shadow: var(--ww-shadow-sm);
+}
+
+/* === Toast === */
+.toast {
+  border-radius: var(--ww-radius);
+  box-shadow: var(--ww-shadow-lg);
+}
+
+/* === Badge === */
+.badge {
+  border-radius: 20px;
+  font-weight: 500;
+  padding: 0.35em 0.75em;
+}
+
+.badge.bg-primary {
+  background: var(--ww-primary) !important;
+}
+
+/* === Progress Bar === */
+.progress {
+  height: 8px;
+  border-radius: 4px;
+  background-color: var(--ww-bg-secondary);
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, var(--ww-primary), var(--ww-accent));
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+/* === Table === */
+.table {
+  color: var(--ww-text);
+}
+
+.table thead th {
+  background: var(--ww-bg-secondary);
+  color: var(--ww-text-secondary);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--ww-border);
+}
+
+.table tbody tr {
+  transition: var(--ww-transition);
+}
+
+.table tbody tr:hover {
+  background: var(--ww-bg-secondary);
+}
+
+/* === Dropdown === */
+.dropdown-menu {
+  background: var(--ww-card-bg);
+  border: 1px solid var(--ww-border);
+  border-radius: var(--ww-radius);
+  box-shadow: var(--ww-shadow-lg);
+  padding: 0.5rem;
+}
+
+.dropdown-item {
+  border-radius: var(--ww-radius-sm);
+  padding: 0.5rem 1rem;
+  color: var(--ww-text);
+  transition: var(--ww-transition);
+}
+
+.dropdown-item:hover {
+  background: var(--ww-bg-secondary);
+  color: var(--ww-primary);
+}
+
+/* === Pagination === */
+.page-link {
+  color: var(--ww-primary);
+  border-color: var(--ww-border);
+  border-radius: var(--ww-radius-sm);
+  margin: 0 2px;
+}
+
+.page-item.active .page-link {
+  background: var(--ww-primary);
+  border-color: var(--ww-primary);
+}

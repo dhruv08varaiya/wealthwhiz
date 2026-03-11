@@ -1,0 +1,231 @@
+/* ======================================================
+   WealthWhiz — Navbar Styles
+   ====================================================== */
+
+.top-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: var(--ww-navbar-bg);
+  border-bottom: 1px solid var(--ww-border-light);
+  box-shadow: var(--ww-shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  gap: 16px;
+}
+
+.top-navbar__left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.top-navbar__menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  padding: 8px;
+  font-size: 1.2rem;
+  color: var(--ww-text);
+  border-radius: var(--ww-radius-sm);
+  transition: var(--ww-transition);
+}
+
+.top-navbar__menu-btn:hover {
+  background: var(--ww-bg-secondary);
+}
+
+.top-navbar__search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ww-bg-secondary);
+  border: 1px solid var(--ww-border);
+  border-radius: var(--ww-radius-sm);
+  padding: 6px 14px;
+  max-width: 400px;
+  flex: 1;
+  transition: var(--ww-transition);
+}
+
+.top-navbar__search:focus-within {
+  border-color: var(--ww-primary);
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
+}
+
+.top-navbar__search-icon {
+  font-size: 0.85rem;
+  opacity: 0.5;
+}
+
+.top-navbar__search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.875rem;
+  color: var(--ww-text);
+  width: 100%;
+}
+
+.top-navbar__search-input::placeholder {
+  color: var(--ww-text-muted);
+}
+
+.top-navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.top-navbar__icon-btn {
+  position: relative;
+  background: none;
+  border: none;
+  padding: 8px;
+  font-size: 1.1rem;
+  border-radius: var(--ww-radius-sm);
+  transition: var(--ww-transition);
+  color: var(--ww-text);
+}
+
+.top-navbar__icon-btn:hover {
+  background: var(--ww-bg-secondary);
+  transform: scale(1.05);
+}
+
+.top-navbar__badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: var(--ww-danger);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-navbar__profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 4px 8px;
+  border-radius: var(--ww-radius-sm);
+  transition: var(--ww-transition);
+  color: var(--ww-text);
+}
+
+.top-navbar__profile-btn:hover {
+  background: var(--ww-bg-secondary);
+}
+
+.top-navbar__profile-btn::after {
+  display: none;
+}
+
+.top-navbar__profile-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ww-primary), var(--ww-accent));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.top-navbar__profile-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 992px) {
+  .top-navbar__menu-btn {
+    display: block;
+  }
+
+  .top-navbar__search {
+    max-width: 200px;
+  }
+
+  .top-navbar__profile-name {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .top-navbar {
+    padding: 10px 16px;
+  }
+
+  .top-navbar__search {
+    display: none;
+  }
+}
+
+/* Custom dropdown (no Bootstrap JS needed) */
+.top-navbar__profile {
+  position: relative;
+}
+
+.top-navbar__dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--ww-card-bg);
+  border: 1px solid var(--ww-border);
+  border-radius: var(--ww-radius);
+  box-shadow: var(--ww-shadow-lg);
+  min-width: 180px;
+  padding: 6px;
+  z-index: 1000;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.top-navbar__dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  background: none;
+  border-radius: var(--ww-radius-sm);
+  font-size: 0.875rem;
+  color: var(--ww-text);
+  cursor: pointer;
+  transition: var(--ww-transition);
+}
+
+.top-navbar__dropdown-item:hover {
+  background: var(--ww-bg-secondary);
+}
+
+.top-navbar__dropdown-item--danger {
+  color: var(--ww-danger);
+}
+
+.top-navbar__dropdown-item--danger:hover {
+  background: #FDE8E4;
+}
+
+[data-theme="dark"] .top-navbar__dropdown-item--danger:hover {
+  background: #4A1515;
+}
+
+.top-navbar__dropdown-divider {
+  height: 1px;
+  background: var(--ww-border);
+  margin: 4px 0;
+}

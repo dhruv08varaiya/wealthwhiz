@@ -1,0 +1,84 @@
+/* ======================================================
+   WealthWhiz — Theme System
+   Green palette (#2D6A4F) + Light/Dark modes
+   ====================================================== */
+
+:root {
+  /* === Brand Colors === */
+  --ww-primary:        #2D6A4F;
+  --ww-primary-light:  #40916C;
+  --ww-primary-dark:   #1B4332;
+  --ww-primary-50:     #D8F3DC;
+  --ww-accent:         #52B788;
+  --ww-accent-light:   #95D5B2;
+
+  /* === Semantic Colors === */
+  --ww-success:        #74C69D;
+  --ww-warning:        #F4A261;
+  --ww-danger:         #E76F51;
+  --ww-info:           #4CC9F0;
+
+  /* === Surfaces (Light) === */
+  --ww-bg:             #F8FAF9;
+  --ww-bg-secondary:   #EDF2EF;
+  --ww-card-bg:        #FFFFFF;
+  --ww-sidebar-bg:     #1B4332;
+  --ww-navbar-bg:      #FFFFFF;
+
+  /* === Text (Light) === */
+  --ww-text:           #1A1A2E;
+  --ww-text-secondary: #4A5568;
+  --ww-text-muted:     #8896A6;
+  --ww-text-inverse:   #FFFFFF;
+
+  /* === Borders (Light) === */
+  --ww-border:         #E2E8F0;
+  --ww-border-light:   #EDF2F7;
+
+  /* === Effects === */
+  --ww-shadow-sm:      0 1px 3px rgba(0, 0, 0, 0.06);
+  --ww-shadow:         0 4px 12px rgba(0, 0, 0, 0.08);
+  --ww-shadow-lg:      0 8px 30px rgba(0, 0, 0, 0.12);
+  --ww-shadow-glow:    0 0 20px rgba(45, 106, 79, 0.15);
+
+  /* === Glass Effect === */
+  --ww-glass-bg:       rgba(255, 255, 255, 0.7);
+  --ww-glass-border:   rgba(255, 255, 255, 0.3);
+
+  /* === Typography === */
+  --ww-font:           'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* === Spacing & Radius === */
+  --ww-radius-sm:      8px;
+  --ww-radius:         12px;
+  --ww-radius-lg:      16px;
+  --ww-radius-xl:      24px;
+
+  /* === Transitions === */
+  --ww-transition:     all 0.2s ease;
+  --ww-transition-slow: all 0.3s ease;
+}
+
+/* === Dark Mode === */
+[data-theme="dark"] {
+  --ww-bg:             #0D1117;
+  --ww-bg-secondary:   #161B22;
+  --ww-card-bg:        #1C2333;
+  --ww-sidebar-bg:     #0D1117;
+  --ww-navbar-bg:      #161B22;
+
+  --ww-text:           #E6EDF3;
+  --ww-text-secondary: #A8B6C5;
+  --ww-text-muted:     #6E7C8C;
+
+  --ww-border:         #2D3748;
+  --ww-border-light:   #1E293B;
+
+  --ww-shadow-sm:      0 1px 3px rgba(0, 0, 0, 0.2);
+  --ww-shadow:         0 4px 12px rgba(0, 0, 0, 0.3);
+  --ww-shadow-lg:      0 8px 30px rgba(0, 0, 0, 0.4);
+  --ww-shadow-glow:    0 0 20px rgba(82, 183, 136, 0.15);
+
+  --ww-glass-bg:       rgba(22, 27, 34, 0.8);
+  --ww-glass-border:   rgba(45, 55, 72, 0.5);
+}
