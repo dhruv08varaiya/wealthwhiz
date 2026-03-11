@@ -22,3 +22,5 @@
 .goal-card__target { font-size: 0.85rem; color: var(--ww-text-muted); margin-left: 4px; }
 .goal-card__footer { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--ww-text-muted); }
 .goal-card__deadline { font-style: italic; }
+
+
