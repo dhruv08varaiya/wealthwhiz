@@ -1,0 +1,96 @@
+.onboarding-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s ease;
+}
+
+.onboarding-wizard {
+  background: var(--ww-card-bg);
+  border-radius: var(--ww-radius-xl);
+  padding: 40px 36px 32px;
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+  box-shadow: var(--ww-shadow-lg);
+  animation: slideUp 0.25s ease;
+}
+
+.onboarding-skip {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: 1px solid var(--ww-border);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  color: var(--ww-text-muted);
+  cursor: pointer;
+  transition: var(--ww-transition);
+}
+.onboarding-skip:hover { color: var(--ww-text); border-color: var(--ww-text-muted); }
+
+.onboarding-steps {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.onboarding-step-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--ww-border);
+  transition: var(--ww-transition);
+}
+.onboarding-step-dot.active { background: var(--ww-primary); transform: scale(1.4); }
+.onboarding-step-dot.done  { background: var(--ww-accent); }
+
+.onboarding-icon {
+  font-size: 3.5rem;
+  text-align: center;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.onboarding-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ww-text);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.onboarding-body { min-height: 140px; }
+
+.onboarding-desc {
+  color: var(--ww-text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.onboarding-field { display: flex; flex-direction: column; gap: 4px; }
+.onboarding-field label { font-weight: 600; color: var(--ww-text); font-size: 0.875rem; }
+
+.onboarding-hint {
+  font-size: 0.75rem;
+  color: var(--ww-text-muted);
+  margin-top: 8px;
+}
+
+.onboarding-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.onboarding-next { min-width: 130px; }

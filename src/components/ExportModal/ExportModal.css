@@ -1,0 +1,90 @@
+.export-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  animation: fadeIn 0.15s ease;
+}
+
+.export-modal {
+  background: var(--ww-card-bg);
+  border-radius: var(--ww-radius-lg);
+  padding: 28px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: var(--ww-shadow-lg);
+  animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.export-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.export-modal__header h5 {
+  margin: 0;
+  font-weight: 700;
+  color: var(--ww-text);
+}
+
+.export-modal__subtitle {
+  color: var(--ww-text-muted);
+  font-size: 0.875rem;
+  margin-bottom: 20px;
+}
+
+.export-modal__options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.export-option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: var(--ww-bg-secondary);
+  border: 2px solid var(--ww-border);
+  border-radius: var(--ww-radius);
+  cursor: pointer;
+  transition: var(--ww-transition);
+  text-align: left;
+  width: 100%;
+}
+
+.export-option:hover {
+  border-color: var(--ww-primary);
+  background: var(--ww-primary-50);
+  transform: translateY(-1px);
+}
+
+.export-option__icon {
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.export-option__label {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--ww-text);
+  display: block;
+}
+
+.export-option__desc {
+  font-size: 0.75rem;
+  color: var(--ww-text-muted);
+  display: block;
+  margin-top: 2px;
+}

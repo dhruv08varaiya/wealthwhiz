@@ -1,0 +1,80 @@
+/* === Skeleton Shimmer Base === */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--ww-bg-secondary) 25%,
+    var(--ww-border) 50%,
+    var(--ww-bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+  border-radius: var(--ww-radius-sm);
+  height: 14px;
+}
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* === Size Variants === */
+.skeleton--sm  { width: 80px; }
+.skeleton--md  { width: 140px; }
+.skeleton--lg  { width: 220px; }
+.skeleton--xl  { width: 100px; height: 32px; }
+.skeleton--full { width: 100%; }
+.skeleton--icon { width: 36px; height: 36px; border-radius: 50%; }
+.skeleton--bar  { width: 100%; height: 8px; border-radius: 4px; }
+
+/* === Table Skeleton === */
+.skeleton-table {
+  background: var(--ww-card-bg);
+  border-radius: var(--ww-radius);
+  border: 1px solid var(--ww-border);
+  overflow: hidden;
+  padding: 0 16px;
+}
+
+.skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--ww-border-light);
+}
+
+.skeleton-row:last-child { border-bottom: none; }
+
+/* === Card Skeleton === */
+.skeleton-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.skeleton-card-item {
+  background: var(--ww-card-bg);
+  border: 1px solid var(--ww-border);
+  border-radius: var(--ww-radius);
+  padding: 20px;
+}
+
+.skeleton-card-item__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* === Stat Skeleton === */
+.skeleton-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.skeleton-stat-item {
+  background: var(--ww-card-bg);
+  border: 1px solid var(--ww-border);
+  border-radius: var(--ww-radius);
+  padding: 20px;
+}

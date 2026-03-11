@@ -2,7 +2,15 @@
 .expenses-page__title { font-size: 1.4rem; font-weight: 700; color: var(--ww-text); margin: 0; }
 .expenses-page__subtitle { color: var(--ww-text-muted); font-size: 0.85rem; margin-top: 2px; }
 .expenses-page__actions { display: flex; gap: 8px; }
-.expenses-page__filters { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-.expenses-page__search { display: flex; align-items: center; gap: 8px; background: var(--ww-bg-secondary); border: 1px solid var(--ww-border); border-radius: var(--ww-radius-sm); padding: 6px 14px; flex: 1; max-width: 360px; }
+.expenses-page__filters { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+.expenses-page__search { display: flex; align-items: center; gap: 8px; background: var(--ww-bg-secondary); border: 1px solid var(--ww-border); border-radius: var(--ww-radius-sm); padding: 6px 14px; flex: 1; max-width: 320px; }
 .expenses-page__search input { border: none; background: transparent; outline: none; font-size: 0.875rem; color: var(--ww-text); width: 100%; }
+.expenses-page__date-range { display: flex; align-items: center; gap: 8px; }
+.expenses-page__date-range input { width: 140px; }
 .expense-cat-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+
+@media (max-width: 576px) {
+  .expenses-page__date-range { flex-wrap: wrap; }
+  .expenses-page__date-range input { width: 130px; }
+}
+

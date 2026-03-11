@@ -115,3 +115,102 @@ button {
 .page-enter {
   animation: fadeIn 0.3s ease-out;
 }
+
+/* ======================================================
+   ✨ Micro-Animations
+   ====================================================== */
+
+/* Staggered card entrance — apply to grid children */
+.budget-grid > *,
+.goals-grid > *,
+.skeleton-cards > * {
+  animation: slideUp 0.35s ease-out both;
+}
+.budget-grid > *:nth-child(1), .goals-grid > *:nth-child(1) { animation-delay: 0.05s; }
+.budget-grid > *:nth-child(2), .goals-grid > *:nth-child(2) { animation-delay: 0.10s; }
+.budget-grid > *:nth-child(3), .goals-grid > *:nth-child(3) { animation-delay: 0.15s; }
+.budget-grid > *:nth-child(4), .goals-grid > *:nth-child(4) { animation-delay: 0.20s; }
+.budget-grid > *:nth-child(5), .goals-grid > *:nth-child(5) { animation-delay: 0.25s; }
+
+/* Emoji icon spin on hover (sidebar icons, card icons) */
+.sidebar__link:hover .sidebar__icon,
+.budget-card:hover .budget-card__icon,
+.goal-card:hover .goal-card__icon {
+  display: inline-block;
+  animation: iconBounce 0.4s ease;
+}
+
+@keyframes iconBounce {
+  0%   { transform: scale(1) rotate(0deg); }
+  30%  { transform: scale(1.3) rotate(-8deg); }
+  60%  { transform: scale(1.1) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* Badge pulse for warning/danger */
+.badge[style*="var(--ww-danger)"],
+.badge[style*="var(--ww-warning)"] {
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.65; }
+}
+
+/* Progress bar animated fill on first render */
+.progress-bar {
+  animation: progressFill 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes progressFill {
+  from { width: 0% !important; }
+}
+
+/* Navbar icon buttons pop on hover */
+.top-navbar__icon-btn {
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.top-navbar__icon-btn:hover {
+  transform: scale(1.18);
+}
+
+/* Table row slide-in */
+.table tbody tr {
+  animation: fadeIn 0.25s ease-out both;
+}
+.table tbody tr:nth-child(1)  { animation-delay: 0.03s; }
+.table tbody tr:nth-child(2)  { animation-delay: 0.06s; }
+.table tbody tr:nth-child(3)  { animation-delay: 0.09s; }
+.table tbody tr:nth-child(4)  { animation-delay: 0.12s; }
+.table tbody tr:nth-child(5)  { animation-delay: 0.15s; }
+.table tbody tr:nth-child(6)  { animation-delay: 0.18s; }
+.table tbody tr:nth-child(n+7) { animation-delay: 0.20s; }
+
+/* Sidebar link active indicator glow */
+.sidebar__link--active {
+  box-shadow: 0 2px 12px rgba(82, 183, 136, 0.4), inset 0 0 0 1px rgba(255,255,255,0.1);
+}
+
+/* Input focus scale */
+.form-control:focus,
+.form-select:focus {
+  transform: scale(1.01);
+}
+
+/* Button active press effect */
+.btn:active {
+  transform: scale(0.97) !important;
+}
+
+/* Card border glow on hover */
+.budget-card:hover {
+  border-color: var(--ww-accent);
+  box-shadow: 0 4px 20px rgba(82, 183, 136, 0.12);
+}
+
+.goal-card:hover {
+  border-color: var(--ww-primary-light);
+  box-shadow: 0 4px 20px rgba(45, 106, 79, 0.12);
+}
+

@@ -23,4 +23,19 @@
 .goal-card__footer { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--ww-text-muted); }
 .goal-card__deadline { font-style: italic; }
 
-
+/* Budget Alerts */
+.budget-alerts {
+  background: rgba(244, 162, 97, 0.08);
+  border: 1px solid var(--ww-warning);
+  border-left: 4px solid var(--ww-warning);
+  border-radius: var(--ww-radius);
+  padding: 14px 18px;
+  margin-bottom: 24px;
+}
+.budget-alert-header { display: flex; align-items: center; gap: 8px; font-weight: 600; color: var(--ww-text); margin-bottom: 10px; }
+.budget-alert-list { display: flex; flex-direction: column; gap: 6px; }
+.budget-alert-item { display: flex; align-items: center; gap: 12px; font-size: 0.875rem; padding: 6px 10px; border-radius: var(--ww-radius-sm); background: var(--ww-card-bg); }
+.budget-alert-item--warning { border-left: 3px solid var(--ww-warning); }
+.budget-alert-item--danger  { border-left: 3px solid var(--ww-danger); }
+.budget-alert-pct { margin-left: auto; font-weight: 600; color: var(--ww-text-muted); }
+.budget-alert-badge { font-size: 0.75rem; }
