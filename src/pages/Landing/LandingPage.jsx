@@ -1,118 +1,298 @@
 import { Link } from 'react-router-dom';
-import { useTheme } from '../../context/ThemeContext';
+import { useEffect, useRef } from 'react';
 import './Landing.css';
 
 export default function LandingPage() {
-  const { isDark, toggleTheme } = useTheme();
+  const navRef = useRef(null);
+  const mockupRef = useRef(null);
+  const wordRefs = useRef([]);
+
+  // ----- Navbar scroll class -----
+  useEffect(() => {
+    const onScroll = () => {
+      if (navRef.current) {
+        navRef.current.classList.toggle('n-nav--scrolled', window.scrollY > 50);
+      }
+      // Parallax: push custom property down the tree
+      const y = window.scrollY;
+      document.documentElement.style.setProperty('--scroll-y', `${y}px`);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // ----- Word-reveal IntersectionObserver -----
+  useEffect(() => {
+    if (!wordRefs.current.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('word--visible');
+          }
+        });
+      },
+      { threshold: 0.5, rootMargin: '0px 0px -60px 0px' }
+    );
+    wordRefs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const testimonialText =
+    'WealthWhiz changed how I handle money as a student. I stopped overspending on food in the first month — saved ₹3,200 without even trying hard.';
+
+  const testimonialWords = testimonialText.split(' ');
+
+  const features = [
+    { icon: '📊', title: 'Smart Budget Planner', desc: 'Set monthly limits per category. Get real-time warnings before you blow your budget.' },
+    { icon: '🤝', title: 'Bill Splitter', desc: 'Split rent, groceries, or outings with roommates. Settle debts in one tap.' },
+    { icon: '🎯', title: 'Savings Goals', desc: "Set a target for your laptop, trip, or emergency fund — and watch it grow." },
+    { icon: '📈', title: 'Spending Analytics', desc: 'Visual charts that reveal where every rupee goes each week and month.' },
+    { icon: '🤖', title: 'AI Finance Coach', desc: 'Personalized daily nudges and tips based on your actual spending patterns.' },
+    { icon: '💳', title: 'UPI Sync', desc: 'Auto-import transactions from any UPI app. Zero manual entry required.' },
+  ];
+
+  const stats = [
+    { value: '12K+', label: 'Students' },
+    { value: '₹2Cr+', label: 'Tracked' },
+    { value: '98%', label: 'Satisfaction' },
+    { value: '4.9★', label: 'Rating' },
+  ];
 
   return (
-    <div className={`landing ${isDark ? 'landing--dark' : 'landing--light'}`}>
-      {/* Navbar */}
-      <nav className="landing-nav">
-        <div className="landing-nav__brand">
-          <span className="landing-nav__logo">💸</span>
-          <span className="landing-nav__name">WealthWhiz</span>
+    <div className="n-landing">
+      {/* ═══════════════ NAVBAR ═══════════════ */}
+      <nav className="n-nav" ref={navRef}>
+        <div className="n-nav__brand">
+          <span className="n-nav__logo-icon">💸</span>
+          <span className="n-nav__logo-text">WealthWhiz</span>
         </div>
-        <div className="landing-nav__links">
-          <a href="#features">Features</a>
-          <a href="#pricing">Pricing</a>
-          <Link to="/login" className="btn btn-outline-light btn-sm">Sign In</Link>
-          <Link to="/register" className="btn btn-primary btn-sm">Get Started</Link>
-          <button className="landing-nav__theme-btn" onClick={toggleTheme} title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
-            {isDark ? '☀️' : '🌙'}
-          </button>
+        <div className="n-nav__links">
+          <a href="#features" className="n-nav__link">Features</a>
+          <a href="#testimonial" className="n-nav__link">Testimonial</a>
+        </div>
+        <div className="n-nav__actions">
+          <Link to="/login" className="n-btn n-btn--outline">Sign In</Link>
+          <Link to="/register" className="n-btn n-btn--filled">Get Started</Link>
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="landing-hero">
-        <div className="landing-hero__content">
-          <span className="landing-hero__badge">🎓 Built for Students</span>
-          <h1 className="landing-hero__title">
-            Take Control of Your <span className="text-gradient">Finances</span>
+      {/* ═══════════════ HERO ═══════════════ */}
+      <section className="n-hero">
+        {/* Glow blobs */}
+        <div className="n-hero__blob n-hero__blob--1" />
+        <div className="n-hero__blob n-hero__blob--2" />
+
+        <div className="n-hero__inner">
+          {/* Pill badge */}
+          <div className="n-hero__pill n-stagger-1">
+            <span className="n-hero__pill-dot" />
+            ✦ Built for Student Life
+          </div>
+
+          {/* Title */}
+          <h1 className="n-hero__title n-stagger-2">
+            Take Control of Your<br />
+            <em className="n-hero__serif">Student Life.</em>
           </h1>
-          <p className="landing-hero__desc">
-            Track expenses, manage budgets, split group costs, and gain actionable insights — all in one beautiful platform designed for student life.
+
+          {/* Subtitle */}
+          <p className="n-hero__sub n-stagger-3">
+            Track expenses, split bills, hit savings goals, and get AI-powered
+            nudges — all in one beautiful platform designed around how students actually spend.
           </p>
-          <div className="landing-hero__actions">
-            <Link to="/register" className="btn btn-primary btn-lg">Start Free →</Link>
-            <Link to="/login" className="btn btn-outline-light btn-lg">Sign In</Link>
+
+          {/* CTA */}
+          <div className="n-hero__cta n-stagger-4">
+            <Link to="/register" className="n-btn n-btn--filled n-btn--lg">
+              Start Free — No Card Needed →
+            </Link>
+            <Link to="/login" className="n-btn n-btn--ghost n-btn--lg">
+              Sign In
+            </Link>
           </div>
-          <div className="landing-hero__stats">
-            <div className="landing-stat"><span className="landing-stat__num">10K+</span><span className="landing-stat__label">Students</span></div>
-            <div className="landing-stat"><span className="landing-stat__num">50K+</span><span className="landing-stat__label">Expenses Tracked</span></div>
-            <div className="landing-stat"><span className="landing-stat__num">₹2Cr+</span><span className="landing-stat__label">Money Managed</span></div>
-          </div>
-        </div>
-        <div className="landing-hero__visual">
-          <div className="landing-mockup">
-            <div className="landing-mockup__card landing-mockup__card--1">
-              <span>💰</span><div><strong>₹12,500</strong><small>Balance</small></div>
+
+          {/* Trust row */}
+          <div className="n-hero__trust n-stagger-5">
+            <div className="n-avatars">
+              {['AK', 'PR', 'SM', 'VR', 'TN'].map((initials, i) => (
+                <div key={i} className="n-avatar" style={{ zIndex: 5 - i }}>
+                  {initials}
+                </div>
+              ))}
             </div>
-            <div className="landing-mockup__card landing-mockup__card--2">
-              <span>📊</span><div><strong>-8%</strong><small>vs last month</small></div>
-            </div>
-            <div className="landing-mockup__card landing-mockup__card--3">
-              <span>🎯</span><div><strong>65%</strong><small>Laptop Goal</small></div>
-            </div>
-            <div className="landing-mockup__card landing-mockup__card--4">
-              <span>👥</span><div><strong>₹600</strong><small>Aarav owes you</small></div>
+            <div className="n-hero__trust-text">
+              <span className="n-stars">★★★★★</span>
+              <span>Loved by <strong>12,000+</strong> students across India</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="landing-features" id="features">
-        <h2 className="landing-section-title">Everything You Need</h2>
-        <p className="landing-section-desc">Powerful features designed specifically for student finances</p>
-        <div className="landing-features__grid">
-          {[
-            { icon: '💰', title: 'Expense Tracking', desc: 'Log every rupee you spend. Categorize, filter, and export with ease.' },
-            { icon: '🎯', title: 'Smart Budgets', desc: 'Set per-category limits and get alerts before you overspend.' },
-            { icon: '👥', title: 'Group Expenses', desc: 'Split rent, groceries, and bills with roommates effortlessly.' },
-            { icon: '📈', title: 'Visual Analytics', desc: 'Interactive charts to understand your spending patterns.' },
-            { icon: '🏦', title: 'Savings Goals', desc: 'Set targets for that laptop, trip, or emergency fund.' },
-            { icon: '🔒', title: 'Bank-Grade Security', desc: 'Encrypted data, secure auth, and DPDP Act compliant.' },
-          ].map((f, i) => (
-            <div key={i} className="feature-card animate-slide-up" style={{ animationDelay: `${i * 0.1}s` }}>
-              <span className="feature-card__icon">{f.icon}</span>
-              <h5 className="feature-card__title">{f.title}</h5>
-              <p className="feature-card__desc">{f.desc}</p>
+      {/* ═══════════════ DASHBOARD MOCKUP ═══════════════ */}
+      <section className="n-mockup-section">
+        <div className="n-mockup-label">Live Dashboard Preview</div>
+        <div className="n-browser" ref={mockupRef}>
+          {/* Browser chrome */}
+          <div className="n-browser__bar">
+            <div className="n-browser__dots">
+              <span className="n-dot n-dot--red" />
+              <span className="n-dot n-dot--yellow" />
+              <span className="n-dot n-dot--green" />
+            </div>
+            <div className="n-browser__url">app.wealthwhiz.in/dashboard</div>
+          </div>
+
+          {/* App UI inside browser */}
+          <div className="n-browser__body">
+            {/* Sidebar */}
+            <aside className="n-sidebar">
+              <div className="n-sidebar__logo">💸 WW</div>
+              {['Dashboard', 'Expenses', 'Budget', 'Groups', 'Analytics'].map((item, i) => (
+                <div key={i} className={`n-sidebar__item ${i === 0 ? 'n-sidebar__item--active' : ''}`}>
+                  <span>{['🏠', '💰', '🎯', '👥', '📈'][i]}</span>
+                  {item}
+                </div>
+              ))}
+            </aside>
+
+            {/* Main content */}
+            <main className="n-dash-main">
+              {/* Metric cards */}
+              <div className="n-metrics">
+                {[
+                  { label: 'Monthly Budget', value: '₹8,000', delta: '', color: '#4ADE80' },
+                  { label: 'Spent So Far', value: '₹4,320', delta: '↑ 12%', color: '#F87171' },
+                  { label: 'Savings', value: '₹2,140', delta: '↑ 8%', color: '#60A5FA' },
+                  { label: 'Group Splits', value: '₹600', delta: 'owed to you', color: '#FBBF24' },
+                ].map((m, i) => (
+                  <div key={i} className="n-metric">
+                    <span className="n-metric__label">{m.label}</span>
+                    <span className="n-metric__value" style={{ color: m.color }}>{m.value}</span>
+                    {m.delta && <span className="n-metric__delta">{m.delta}</span>}
+                  </div>
+                ))}
+              </div>
+
+              {/* SVG Line chart */}
+              <div className="n-chart">
+                <div className="n-chart__label">Spending — Last 7 Days</div>
+                <svg viewBox="0 0 560 120" preserveAspectRatio="none" className="n-chart__svg">
+                  <defs>
+                    <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#4ADE80" stopOpacity="0.35" />
+                      <stop offset="100%" stopColor="#4ADE80" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  {/* Area fill */}
+                  <path
+                    d="M0,90 L80,70 L160,85 L240,40 L320,60 L400,20 L480,50 L560,30 L560,120 L0,120 Z"
+                    fill="url(#chartGrad)"
+                  />
+                  {/* Line */}
+                  <path
+                    d="M0,90 L80,70 L160,85 L240,40 L320,60 L400,20 L480,50 L560,30"
+                    fill="none"
+                    stroke="#4ADE80"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  {/* Day labels */}
+                  {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d, i) => (
+                    <text key={i} x={i * 80 + 8} y="118" fontSize="9" fill="rgba(255,255,255,0.35)">{d}</text>
+                  ))}
+                </svg>
+              </div>
+            </main>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════ STATS ROW ═══════════════ */}
+      <section className="n-stats">
+        {stats.map((s, i) => (
+          <div key={i} className="n-stat">
+            <span className="n-stat__value">{s.value}</span>
+            <span className="n-stat__label">{s.label}</span>
+          </div>
+        ))}
+      </section>
+
+      {/* ═══════════════ FEATURES ═══════════════ */}
+      <section className="n-features" id="features">
+        <div className="n-section-tag">Features</div>
+        <h2 className="n-section-title">
+          Every tool a student <br />
+          <em className="n-accent-serif">actually needs.</em>
+        </h2>
+        <p className="n-section-sub">
+          Built around the real pain-points: shared rent, food runs, exam splurges, and saving for something bigger.
+        </p>
+        <div className="n-features__grid">
+          {features.map((f, i) => (
+            <div key={i} className="n-feat-card" style={{ animationDelay: `${i * 0.08}s` }}>
+              <span className="n-feat-card__icon">{f.icon}</span>
+              <h3 className="n-feat-card__title">{f.title}</h3>
+              <p className="n-feat-card__desc">{f.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Pricing */}
-      <section className="landing-pricing" id="pricing">
-        <h2 className="landing-section-title">Simple Pricing</h2>
-        <p className="landing-section-desc">Start free, upgrade when you're ready</p>
-        <div className="landing-pricing__grid">
-          {[
-            { name: 'Free', price: '₹0', period: 'forever', features: ['50 expenses/month', 'Basic analytics', '2 groups', 'Light/Dark theme'], cta: 'Get Started', primary: false },
-            { name: 'Pro', price: '₹99', period: '/month', features: ['Unlimited expenses', 'Advanced analytics', 'Unlimited groups', 'CSV export', 'Receipt scanning', '2FA security'], cta: 'Upgrade to Pro', primary: true },
-            { name: 'Team', price: '₹499', period: '/month', features: ['Everything in Pro', 'Admin dashboard', 'Team management', 'Audit logs', 'Priority support'], cta: 'Contact Us', primary: false },
-          ].map((plan, i) => (
-            <div key={i} className={`pricing-card ${plan.primary ? 'pricing-card--primary' : ''}`}>
-              {plan.primary && <span className="pricing-card__badge">Popular</span>}
-              <h4 className="pricing-card__name">{plan.name}</h4>
-              <div className="pricing-card__price">{plan.price}<small>{plan.period}</small></div>
-              <ul className="pricing-card__features">
-                {plan.features.map((f, j) => <li key={j}>✓ {f}</li>)}
-              </ul>
-              <Link to="/register" className={`btn w-100 ${plan.primary ? 'btn-primary' : 'btn-outline-primary'}`}>{plan.cta}</Link>
-            </div>
+      {/* ═══════════════ TESTIMONIAL ═══════════════ */}
+      <section className="n-testimonial" id="testimonial">
+        <div className="n-section-tag">Testimonial</div>
+        <blockquote className="n-quote">
+          {testimonialWords.map((word, i) => (
+            <span
+              key={i}
+              className="n-word"
+              ref={(el) => (wordRefs.current[i] = el)}
+            >
+              {word}{' '}
+            </span>
           ))}
+        </blockquote>
+        <div className="n-testimonial__author">
+          <div className="n-testimonial__avatar">PA</div>
+          <div>
+            <strong>Priya Agarwal</strong>
+            <span>B.Tech CSE, Year 2 · BITS Pilani</span>
+          </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="landing-footer">
-        <div className="landing-footer__brand">
+      {/* ═══════════════ CTA ═══════════════ */}
+      <section className="n-cta">
+        <div className="n-cta__blob" />
+        <div className="n-section-tag">Get Started</div>
+        <h2 className="n-cta__title">
+          Your finances, finally <br />
+          <em className="n-accent-serif">under control.</em>
+        </h2>
+        <p className="n-cta__sub">Join 12,000+ students who manage their money smarter with WealthWhiz.</p>
+        <div className="n-cta__actions">
+          <Link to="/register" className="n-btn n-btn--filled n-btn--lg">
+            Create Free Account →
+          </Link>
+          <Link to="/login" className="n-btn n-btn--ghost n-btn--lg">
+            Sign In
+          </Link>
+        </div>
+      </section>
+
+      {/* ═══════════════ FOOTER ═══════════════ */}
+      <footer className="n-footer">
+        <div className="n-footer__brand">
           <span>💸</span> WealthWhiz
         </div>
         <p>© 2026 WealthWhiz. Crafted for students, by students.</p>
+        <div className="n-footer__links">
+          <a href="#features">Features</a>
+          <Link to="/login">Sign In</Link>
+          <Link to="/register">Register</Link>
+        </div>
       </footer>
     </div>
   );
