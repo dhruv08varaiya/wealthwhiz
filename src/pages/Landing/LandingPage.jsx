@@ -3,6 +3,15 @@ import { useEffect, useRef } from 'react';
 import './Landing.css';
 
 export default function LandingPage() {
+  const features = [
+    { title: 'Smart Budget Planner', desc: 'Set monthly limits per category. Get real-time warnings before you blow your budget.', size: 'large' },
+    { title: 'Bill Splitter', desc: 'Split rent, groceries, or outings with roommates. Settle debts in one tap.', size: 'standard' },
+    { title: 'Savings Goals', desc: "Set a target for your laptop, trip, or emergency fund — and watch it grow.", size: 'standard' },
+    { title: 'Spending Analytics', desc: 'Visual charts that reveal where every rupee goes each week and month.', size: 'tall' },
+    { title: 'AI Finance Coach', desc: 'Personalized daily nudges and tips based on your actual spending patterns.', size: 'wide' },
+    { title: 'UPI Sync', desc: 'Auto-import transactions from any UPI app. Zero manual entry required.', size: 'standard' },
+  ];
+
   const navRef = useRef(null);
   const mockupRef = useRef(null);
   const wordRefs = useRef([]);
@@ -16,10 +25,65 @@ export default function LandingPage() {
       // Parallax: push custom property down the tree
       const y = window.scrollY;
       document.documentElement.style.setProperty('--scroll-y', `${y}px`);
+
+      // Curriculum progress tracking
+      const curriculum = document.querySelector('.n-curriculum');
+      if (curriculum) {
+        const rect = curriculum.getBoundingClientRect();
+        const winHeight = window.innerHeight;
+        // Calculate progress based on how much of the curriculum has passed the viewport middle
+        const start = rect.top - winHeight / 2;
+        const total = rect.height;
+        let progress = (Math.abs(start) / total) * 100;
+        
+        if (rect.top > winHeight / 2) progress = 0;
+        if (rect.bottom < winHeight / 2) progress = 100;
+        
+        curriculum.style.setProperty('--curriculum-progress', `${progress}%`);
+      }
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // ----- Bento Grid Mouse Glow -----
+  useEffect(() => {
+    const cards = document.querySelectorAll('.n-feat-card');
+    const onMouseMove = (e) => {
+      const card = e.currentTarget;
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    };
+
+    cards.forEach(card => {
+      card.addEventListener('mousemove', onMouseMove);
+    });
+
+    return () => {
+      cards.forEach(card => {
+        card.removeEventListener('mousemove', onMouseMove);
+      });
+    };
+  }, []);
+
+  // ----- Vertical Curriculum Reveal -----
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('n-feat-row--visible');
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    document.querySelectorAll('.n-feat-row').forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [features]);
 
   // ----- Word-reveal IntersectionObserver -----
   useEffect(() => {
@@ -38,26 +102,11 @@ export default function LandingPage() {
     return () => observer.disconnect();
   }, []);
 
-  const testimonialText =
-    'WealthWhiz changed how I handle money as a student. I stopped overspending on food in the first month — saved ₹3,200 without even trying hard.';
 
-  const testimonialWords = testimonialText.split(' ');
 
-  const features = [
-    { icon: '📊', title: 'Smart Budget Planner', desc: 'Set monthly limits per category. Get real-time warnings before you blow your budget.' },
-    { icon: '🤝', title: 'Bill Splitter', desc: 'Split rent, groceries, or outings with roommates. Settle debts in one tap.' },
-    { icon: '🎯', title: 'Savings Goals', desc: "Set a target for your laptop, trip, or emergency fund — and watch it grow." },
-    { icon: '📈', title: 'Spending Analytics', desc: 'Visual charts that reveal where every rupee goes each week and month.' },
-    { icon: '🤖', title: 'AI Finance Coach', desc: 'Personalized daily nudges and tips based on your actual spending patterns.' },
-    { icon: '💳', title: 'UPI Sync', desc: 'Auto-import transactions from any UPI app. Zero manual entry required.' },
-  ];
 
-  const stats = [
-    { value: '12K+', label: 'Students' },
-    { value: '₹2Cr+', label: 'Tracked' },
-    { value: '98%', label: 'Satisfaction' },
-    { value: '4.9★', label: 'Rating' },
-  ];
+
+
 
   return (
     <div className="n-landing">
@@ -69,7 +118,6 @@ export default function LandingPage() {
         </div>
         <div className="n-nav__links">
           <a href="#features" className="n-nav__link">Features</a>
-          <a href="#testimonial" className="n-nav__link">Testimonial</a>
         </div>
         <div className="n-nav__actions">
           <Link to="/login" className="n-btn n-btn--outline">Sign In</Link>
@@ -112,20 +160,7 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          {/* Trust row */}
-          <div className="n-hero__trust n-stagger-5">
-            <div className="n-avatars">
-              {['AK', 'PR', 'SM', 'VR', 'TN'].map((initials, i) => (
-                <div key={i} className="n-avatar" style={{ zIndex: 5 - i }}>
-                  {initials}
-                </div>
-              ))}
-            </div>
-            <div className="n-hero__trust-text">
-              <span className="n-stars">★★★★★</span>
-              <span>Loved by <strong>12,000+</strong> students across India</span>
-            </div>
-          </div>
+
         </div>
       </section>
 
@@ -209,15 +244,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ═══════════════ STATS ROW ═══════════════ */}
-      <section className="n-stats">
-        {stats.map((s, i) => (
-          <div key={i} className="n-stat">
-            <span className="n-stat__value">{s.value}</span>
-            <span className="n-stat__label">{s.label}</span>
-          </div>
-        ))}
-      </section>
+
 
       {/* ═══════════════ FEATURES ═══════════════ */}
       <section className="n-features" id="features">
@@ -229,39 +256,24 @@ export default function LandingPage() {
         <p className="n-section-sub">
           Built around the real pain-points: shared rent, food runs, exam splurges, and saving for something bigger.
         </p>
-        <div className="n-features__grid">
+        <div className="n-curriculum">
+          <div className="n-curriculum__line">
+            <div className="n-curriculum__progress" />
+          </div>
+          
           {features.map((f, i) => (
-            <div key={i} className="n-feat-card" style={{ animationDelay: `${i * 0.08}s` }}>
-              <span className="n-feat-card__icon">{f.icon}</span>
-              <h3 className="n-feat-card__title">{f.title}</h3>
-              <p className="n-feat-card__desc">{f.desc}</p>
+            <div key={i} className="n-feat-row">
+              <div className="n-feat-node" />
+              <div className="n-feat-content">
+                <h3 className="n-feat-content__title">{f.title}</h3>
+                <p className="n-feat-content__desc">{f.desc}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ═══════════════ TESTIMONIAL ═══════════════ */}
-      <section className="n-testimonial" id="testimonial">
-        <div className="n-section-tag">Testimonial</div>
-        <blockquote className="n-quote">
-          {testimonialWords.map((word, i) => (
-            <span
-              key={i}
-              className="n-word"
-              ref={(el) => (wordRefs.current[i] = el)}
-            >
-              {word}{' '}
-            </span>
-          ))}
-        </blockquote>
-        <div className="n-testimonial__author">
-          <div className="n-testimonial__avatar">PA</div>
-          <div>
-            <strong>Priya Agarwal</strong>
-            <span>B.Tech CSE, Year 2 · BITS Pilani</span>
-          </div>
-        </div>
-      </section>
+
 
       {/* ═══════════════ CTA ═══════════════ */}
       <section className="n-cta">
@@ -289,9 +301,6 @@ export default function LandingPage() {
         </div>
         <p>© 2026 WealthWhiz. Crafted for students, by students.</p>
         <div className="n-footer__links">
-          <a href="#features">Features</a>
-          <Link to="/login">Sign In</Link>
-          <Link to="/register">Register</Link>
         </div>
       </footer>
     </div>

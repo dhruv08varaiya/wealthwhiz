@@ -152,24 +152,25 @@
   font-size: 0.94rem;
 }
 
-/* ─── NAVBAR ─────────────────────────────────────────── */
+/* ─── NAVBAR ────────────────────────────────────────── */
 .n-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 48px;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  background: rgba(8, 12, 16, 0.55);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  padding: 0 40px;
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   border-bottom: 1px solid transparent;
-  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.n-nav--scrolled {
-  background: rgba(8, 12, 16, 0.88);
+.n-nav.n-nav--scrolled {
+  height: 64px;
+  background: rgba(8, 12, 16, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom-color: var(--n-border);
   box-shadow: 0 4px 32px rgba(0,0,0,0.4);
 }
@@ -530,53 +531,135 @@
   color: var(--n-muted);
 }
 
-/* ─── FEATURES ───────────────────────────────────────── */
+/* ─── VERTICAL CURRICULUM timeline (DesignRocket) ────── */
 .n-features {
-  padding: 100px 24px;
-  max-width: 1100px;
+  padding: 120px 24px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
-.n-features__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+.n-curriculum {
+  position: relative;
+  padding: 80px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 160px; /* Large gap to allow scroll feeling */
 }
 
-.n-feat-card {
+/* Central path line */
+.n-curriculum__line {
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(-50%);
+  overflow: hidden;
+}
+
+/* Animated progress line - this will be height: 100% when active */
+.n-curriculum__progress {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: var(--curriculum-progress, 0%); /* Driven by scroll head */
+  background: linear-gradient(to bottom, transparent, var(--n-accent));
+  box-shadow: 0 0 15px var(--n-accent-glow);
+  transition: height 0.1s linear;
+}
+
+.n-feat-row {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.n-feat-row--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggering the left/right items */
+.n-feat-row:nth-child(odd) { justify-content: flex-start; }
+.n-feat-row:nth-child(even) { justify-content: flex-end; }
+
+/* The node bubble on the line */
+.n-feat-node {
+  position: absolute;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  background: #080C10;
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  transition: all 0.5s ease;
+}
+
+.n-feat-row--visible .n-feat-node {
+  border-color: var(--n-accent);
+  box-shadow: 0 0 15px var(--n-accent-glow);
+  background: var(--n-accent);
+}
+
+.n-feat-content {
+  width: 42%;
   background: var(--n-surface);
   border: 1px solid var(--n-border);
-  border-radius: var(--n-radius);
-  padding: 30px 28px;
-  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
-  opacity: 0;
-  animation: fadeUp 0.6s cubic-bezier(.22,.68,0,1.2) forwards;
-}
-.n-feat-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(74, 222, 128, 0.25);
-  box-shadow: 0 16px 48px rgba(74, 222, 128, 0.08);
+  border-radius: 20px;
+  padding: 40px;
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
 }
 
-.n-feat-card__icon {
-  font-size: 2rem;
-  display: block;
-  margin-bottom: 16px;
+/* "Loading" shimmer effect upon reveal */
+.n-feat-row--visible .n-feat-content::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(74, 222, 128, 0.05),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: shimmerReveal 1.5s ease-out forwards;
 }
-.n-feat-card__title {
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 8px;
+
+@keyframes shimmerReveal {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.n-feat-content__title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 12px;
   color: var(--n-text);
+  letter-spacing: -0.5px;
 }
-.n-feat-card__desc {
-  font-size: 0.875rem;
+
+.n-feat-content__desc {
+  font-size: 1.05rem;
   color: var(--n-muted);
   line-height: 1.6;
-  margin: 0;
 }
 
-/* ─── TESTIMONIAL ────────────────────────────────────── */
+/* Mobile adjustments - stack nodes and cards */
+@media (max-width: 768px) {
+  .n-curriculum__line { left: 24px; transform: none; }
+  .n-feat-node { left: 24px; }
+  .n-feat-row:nth-child(even), .n-feat-row:nth-child(odd) { justify-content: flex-start; }
+  .n-feat-content { width: calc(100% - 60px); margin-left: 60px; padding: 30px; }
+}
+
 .n-testimonial {
   padding: 100px 24px;
   max-width: 800px;
