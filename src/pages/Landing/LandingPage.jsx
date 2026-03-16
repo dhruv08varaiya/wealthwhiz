@@ -4,11 +4,11 @@ import './Landing.css';
 
 export default function LandingPage() {
   const features = [
-    { title: 'Smart Budget Planner', desc: 'Set monthly limits per category. Get real-time warnings before you blow your budget.', size: 'large' },
+    { title: 'Smart Budget Planner', desc: 'Set monthly limits per category. Get real-time warnings before you blow your budget.', size: 'standard' },
     { title: 'Bill Splitter', desc: 'Split rent, groceries, or outings with roommates. Settle debts in one tap.', size: 'standard' },
     { title: 'Savings Goals', desc: "Set a target for your laptop, trip, or emergency fund — and watch it grow.", size: 'standard' },
-    { title: 'Spending Analytics', desc: 'Visual charts that reveal where every rupee goes each week and month.', size: 'tall' },
-    { title: 'AI Finance Coach', desc: 'Personalized daily nudges and tips based on your actual spending patterns.', size: 'wide' },
+    { title: 'Spending Analytics', desc: 'Visual charts that reveal where every rupee goes each week and month.', size: 'standard' },
+    { title: 'AI Finance Coach', desc: 'Personalized daily nudges and tips based on your actual spending patterns.', size: 'standard' },
     { title: 'UPI Sync', desc: 'Auto-import transactions from any UPI app. Zero manual entry required.', size: 'standard' },
   ];
 
